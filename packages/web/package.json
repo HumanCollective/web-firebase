@@ -1,12 +1,13 @@
 {
   "name": "@humancollective/human-hooks-firebase",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Mitchell Butler <mitch@humancollective.co>",
   "license": "MIT",
   "source": "src/index.ts",
   "main": "dist/index.js",
   "module": "dist/index.module.js",
   "unpkg": "dist/index.umd.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "microbundle",
     "dev": "microbundle watch"
