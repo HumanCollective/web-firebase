@@ -1,6 +1,6 @@
-# `@humancollective/human-hooks-firebase`
+## `human-hooks-firebase`
 
-Built by [Human](https://humancollective.co).
+### Built by [Human](https://humancollective.co).
 
 A set of simple helpers for accessing Firebase Firestore data in realtime using React Contexts.
 
