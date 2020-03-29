@@ -1,6 +1,6 @@
 {
   "name": "@humancollective/human-hooks-firebase",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Mitchell Butler <mitch@humancollective.co>",
   "license": "MIT",
   "source": "src/index.ts",
