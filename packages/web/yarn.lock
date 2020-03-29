@@ -501,16 +501,6 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@react-native-firebase/auth@^6.3.4":
-  version "6.3.4"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-6.3.4.tgz#b2f52a4e4cca308e3c169f33d1483de115abe0e2"
-  integrity sha512-Km3lOVlc/qZxPJHB2FtKqoM4g84zCq3gqtzjCi2U42QQd7Xxp0lzUhgedm4un8odkrrjmkNfrrwEDxTw5UG/Vg==
-
-"@react-native-firebase/firestore@^6.3.4":
-  version "6.3.4"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-6.3.4.tgz#5c42c3c35548824db90543330fc2ffde20aa3d52"
-  integrity sha512-n/u5p5DeBwAQ61YJ8r6wFfh77ivLbqEclc6FRPAJvLizJ+5777E2/XTFDi0fP/3l0lv5cForvNAySXJfdg2Zcw==
-
 "@types/bytebuffer@^5.0.40":
   version "5.0.40"
   resolved "https://registry.yarnpkg.com/@types/bytebuffer/-/bytebuffer-5.0.40.tgz#d6faac40dcfb09cd856cdc4c01d3690ba536d3ee"

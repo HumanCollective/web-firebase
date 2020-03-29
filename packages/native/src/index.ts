@@ -1,18 +1,10 @@
-import { FirebaseAuthTypes } from '@react-native-firebase/auth'
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 
-import { useAuth as useAuthFactory } from '../hooks/useAuth'
-import { useAuthedCollection as useAuthedCollectionFactory } from '../hooks/useAuthedCollection'
-import { useAuthedCollectionCount as useAuthedCollectionCountFactory } from '../hooks/useAuthedCollectionCount'
-import { useAuthedDocument as useAuthedDocumentFactory } from '../hooks/useAuthedDocument'
-
-const auth = require('@react-native-firebase/auth')
-
-if (!auth) {
-  throw new Error(
-    "Make sure you've included the @react-native-firebase/auth package",
-  )
-}
+import { useAuth as useAuthFactory } from './shared/hooks/useAuth'
+import { useAuthedCollection as useAuthedCollectionFactory } from './shared/hooks/useAuthedCollection'
+import { useAuthedCollectionCount as useAuthedCollectionCountFactory } from './shared/hooks/useAuthedCollectionCount'
+import { useAuthedDocument as useAuthedDocumentFactory } from './shared/hooks/useAuthedDocument'
 
 const useAuth = useAuthFactory<FirebaseAuthTypes.User>(auth)
 
