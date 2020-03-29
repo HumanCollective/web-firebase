@@ -1,0 +1,29 @@
+{
+  "name": "@humancollective/human-hooks-firebase",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "umd:main": "dist/index.umd.js",
+  "module": "dist/index.m.js",
+  "source": "src/index.ts",
+  "types": "dist/index.d.ts",
+  "author": "Mitchell Butler <mitch@humancollective.co>",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.13.1"
+  },
+  "devDependencies": {
+    "@react-native-firebase/auth": "^6.3.4",
+    "@react-native-firebase/firestore": "^6.3.4",
+    "firebase": "^7.13.1",
+    "microbundle": "^0.11.0",
+    "react": "^16.13.1"
+  },
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch"
+  },
+  "dependencies": {
+    "@firebase/auth-types": "^0.10.0",
+    "@firebase/firestore-types": "^1.10.1"
+  }
+}
