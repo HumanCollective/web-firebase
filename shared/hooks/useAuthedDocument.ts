@@ -23,7 +23,7 @@ export const useAuthedDocument = <
   getQueryRef,
   includeId,
   defaultValue = null,
-  transformValue = v => v,
+  transformValue = (v) => v,
 }: UseAuthedDocumentOptions<R, T>) => {
   const [value, setValue] = useState(defaultValue as T | null)
   const [listener, setListener] = useState({ unsubscribe: () => {} })
@@ -38,7 +38,7 @@ export const useAuthedDocument = <
       setListener({ unsubscribe: off })
       return off
     }
-  }, [firebaseUser, dependencies])
+  }, [firebaseUser, ...dependencies])
 
   const onUpdate = async (doc: S) => {
     const nextValue: T = transformValue({
