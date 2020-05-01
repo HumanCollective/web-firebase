@@ -1,4 +1,6 @@
-import { auth, User, firestore } from 'firebase'
+import * as firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
 
 import {
   UseAuthValue as GenericUseAuthValue,
@@ -17,37 +19,37 @@ import {
   useAuthedDocument as useAuthedDocumentFactory,
 } from './shared/hooks/useAuthedDocument'
 
-const useAuth = useAuthFactory<User>(auth)
+const useAuth = useAuthFactory<firebase.User>(firebase.auth)
 
-type UseAuthValue = GenericUseAuthValue<User>
+type UseAuthValue = GenericUseAuthValue<firebase.User>
 
 const useAuthedCollection = useAuthedCollectionFactory<
-  firestore.CollectionReference | firestore.Query,
-  firestore.QuerySnapshot
+  firebase.firestore.CollectionReference | firebase.firestore.Query,
+  firebase.firestore.QuerySnapshot
 >(useAuth)
 
 type UseAuthedCollectionOptions = GenericUseAuthedCollectionOptions<
-  firestore.CollectionReference | firestore.Query,
-  firestore.QuerySnapshot
+  firebase.firestore.CollectionReference | firebase.firestore.Query,
+  firebase.firestore.QuerySnapshot
 >
 
 const useAuthedCollectionCount = useAuthedCollectionCountFactory<
-  firestore.CollectionReference | firestore.Query,
-  firestore.QuerySnapshot
+  firebase.firestore.CollectionReference | firebase.firestore.Query,
+  firebase.firestore.QuerySnapshot
 >(useAuth)
 
 type UseAuthedCollectionCountOptions = GenericUseAuthedCollectionCountOptions<
-  firestore.CollectionReference | firestore.Query
+  firebase.firestore.CollectionReference | firebase.firestore.Query
 >
 
 const useAuthedDocument = useAuthedDocumentFactory<
-  firestore.DocumentReference,
-  firestore.DocumentSnapshot
+  firebase.firestore.DocumentReference,
+  firebase.firestore.DocumentSnapshot
 >(useAuth)
 
 type UseAuthedDocumentOptions = GenericUseAuthedDocumentOptions<
-  firestore.DocumentReference,
-  firestore.DocumentSnapshot
+  firebase.firestore.DocumentReference,
+  firebase.firestore.DocumentSnapshot
 >
 
 export {
