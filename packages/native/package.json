@@ -2,29 +2,49 @@
   "name": "@humancollective/human-hooks-firebase-native",
   "version": "0.0.4",
   "author": "Mitchell Butler <mitch@humancollective.co>",
+  "module": "dist/native.esm.js",
   "license": "MIT",
-  "source": "src/index.ts",
   "main": "dist/index.js",
-  "module": "dist/index.module.js",
-  "unpkg": "dist/index.umd.js",
-  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
-    "build": "microbundle",
-    "dev": "microbundle watch"
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
   },
   "peerDependencies": {
-    "@react-native-firebase/auth": "^6.3.4",
-    "@react-native-firebase/firestore": "^6.3.4",
-    "react": "^16.13.1"
+    "react": ">=16"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all"
   },
   "devDependencies": {
-    "@react-native-firebase/auth": "^6.3.4",
-    "@react-native-firebase/firestore": "^6.3.4",
-    "microbundle": "^0.11.0",
-    "react": "^16.13.1"
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "husky": "^4.2.5",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "tsdx": "^0.13.2",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@firebase/auth-types": "^0.10.0",
-    "@firebase/firestore-types": "^1.10.1"
+    "@react-native-firebase/auth": "^8.2.0",
+    "@react-native-firebase/firestore": "^7.4.3"
   }
 }

@@ -1,39 +1,28 @@
 import { useState, useEffect } from 'react'
-import {
-  CollectionReference,
-  Query,
-  QuerySnapshot,
-} from '@firebase/firestore-types'
-import {
-  RequiredCollectionQueryProps,
-  RequiredCollectionSnapshotProps,
-} from '../types'
 
-export interface UseAuthedCollectionOptions<Q, T = any> {
-  getQueryRef: (firebaseUserId: string, dependencies?: any[]) => Q
-  dependencies?: any[]
-  defaultValue?: T[] | null
-  includeIds?: boolean
-  transformValue?: (storedValue: any) => T
-  sortValues?: (values: T[]) => T[]
-}
+import { useAuth } from '../'
+import { QuerySnapshot, QueryReference } from './types'
 
-export const useAuthedCollection = <
-  Q extends RequiredCollectionQueryProps = CollectionReference | Query,
-  S extends RequiredCollectionSnapshotProps = QuerySnapshot
->(
-  useAuth,
-) => <T extends unknown>({
+export const useAuthedCollection = <T = any>({
+  app,
   dependencies = [],
   getQueryRef,
   includeIds,
-  defaultValue = null,
+  defaultValue,
   transformValue = v => v,
   sortValues = vs => vs,
-}: UseAuthedCollectionOptions<Q, T>) => {
+}: {
+  app?: any
+  getQueryRef: (firebaseUserId: string, dependencies?: any[]) => QueryReference
+  dependencies?: any[]
+  defaultValue?: T[]
+  includeIds?: boolean
+  transformValue?: (storedValue: any) => T
+  sortValues?: (values: T[]) => T[]
+}) => {
   const [value, setValue] = useState(defaultValue)
   const [listener, setListener] = useState({ unsubscribe: () => {} })
-  const { firebaseUser } = useAuth()
+  const { firebaseUser } = useAuth(app)
 
   useEffect(() => {
     listener.unsubscribe()
@@ -44,9 +33,10 @@ export const useAuthedCollection = <
       setListener({ unsubscribe: off })
       return off
     }
+    return () => {}
   }, [firebaseUser, ...dependencies])
 
-  const onUpdate = async (querySnap: S) => {
+  const onUpdate = async (querySnap: QuerySnapshot) => {
     const allDocs = querySnap.docs
     const nextValue: T[] = []
     for (const doc of allDocs) {
