@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 
-import { useAuth } from '../'
+import { useAuth } from './useAuth'
 import { DocumentReference, DocumentSnapshot } from './types'
 
 export const useAuthedDocument = <T = any>(
@@ -11,7 +11,7 @@ export const useAuthedDocument = <T = any>(
   {
     includeId,
     defaultValue,
-    transformValue = v => v,
+    transformValue = (v) => v,
   }: {
     defaultValue?: null
     includeId?: boolean

@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 
-import { useAuth } from '../'
+import { useAuth } from './useAuth'
 import { QuerySnapshot, QueryReference } from './types'
 
 export const useAuthedCollectionCount = (
