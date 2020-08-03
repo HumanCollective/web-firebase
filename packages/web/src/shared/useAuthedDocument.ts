@@ -1,28 +1,30 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 import { useAuth } from '../'
 import { DocumentReference, DocumentSnapshot } from './types'
 
-export const useAuthedDocument = <T = any>({
-  app,
-  dependencies = [],
-  getQueryRef,
-  includeId,
-  defaultValue,
-  transformValue = (v) => v,
-}: {
-  app?: any
+export const useAuthedDocument = <T = any>(
   getQueryRef: (
     firebaseUserId: string,
     dependencies?: any[],
-  ) => DocumentReference
-  dependencies?: any[]
-  defaultValue?: null
-  includeId?: boolean
-  transformValue?: (storedValue: any) => T
-}) => {
+  ) => DocumentReference,
+  {
+    includeId,
+    defaultValue,
+    transformValue = v => v,
+  }: {
+    defaultValue?: null
+    includeId?: boolean
+    transformValue?: (storedValue: any) => T
+  } = {},
+  dependencies: any[] = [],
+) => {
   const [value, setValue] = useState(defaultValue as T | null)
   const [listener, setListener] = useState({ unsubscribe: () => {} })
+
+  const app = useMemo(() => getQueryRef('unused_uid').firestore.app, [
+    getQueryRef,
+  ])
   const { firebaseUser } = useAuth(app)
 
   useEffect(() => {

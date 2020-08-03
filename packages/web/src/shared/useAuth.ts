@@ -17,8 +17,12 @@ export const useAuthFactory = (auth: Auth) => <U = DefaultUserType>(
   const [value, setValue] = useState(defaults)
 
   useEffect(() => {
-    auth(app).onAuthStateChanged(handleAuth)
-  }, [])
+    try {
+      return auth(app).onAuthStateChanged(handleAuth)
+    } catch (error) {
+      console.error(error)
+    }
+  }, [app])
 
   const handleAuth = async (user?: U) => {
     setValue({
