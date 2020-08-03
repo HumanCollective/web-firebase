@@ -20,14 +20,13 @@ import { Order } from '../types';
 export const OrdersList = () => {
   // create a Firestore listener with the current user's ID
   // it will respond automatically to changes in auth / user!
-  const orders = useAuthedCollection<Order>({
-    getQueryRef: uid =>
-      firebase
-        .firestore()
-        .collection('orders')
-        .where('user', '==', uid),
-    includeIds: true,
-  });
+  const orders = useAuthedCollection<Order>(
+    uid => firebase
+      .firestore()
+      .collection('orders')
+      .where('user', '==', uid),
+    { includeIds: true }
+  )
 
   return orders ? (
     <div>
