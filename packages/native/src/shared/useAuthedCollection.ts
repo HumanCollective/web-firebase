@@ -1,27 +1,29 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
-import { useAuth } from '../'
+import { useAuth } from './useAuth'
 import { QuerySnapshot, QueryReference } from './types'
 
-export const useAuthedCollection = <T = any>({
-  app,
-  dependencies = [],
-  getQueryRef,
-  includeIds,
-  defaultValue,
-  transformValue = v => v,
-  sortValues = vs => vs,
-}: {
-  app?: any
-  getQueryRef: (firebaseUserId: string, dependencies?: any[]) => QueryReference
-  dependencies?: any[]
-  defaultValue?: T[]
-  includeIds?: boolean
-  transformValue?: (storedValue: any) => T
-  sortValues?: (values: T[]) => T[]
-}) => {
+export const useAuthedCollection = <T = any>(
+  getQueryRef: (firebaseUserId: string, dependencies?: any[]) => QueryReference,
+  {
+    includeIds,
+    defaultValue,
+    transformValue = v => v,
+    sortValues = vs => vs,
+  }: {
+    defaultValue?: T[]
+    includeIds?: boolean
+    transformValue?: (storedValue: any) => T
+    sortValues?: (values: T[]) => T[]
+  } = {},
+  dependencies: any[] = [],
+) => {
   const [value, setValue] = useState(defaultValue)
   const [listener, setListener] = useState({ unsubscribe: () => {} })
+
+  const app = useMemo(() => getQueryRef('unused_uid').firestore.app, [
+    getQueryRef,
+  ])
   const { firebaseUser } = useAuth(app)
 
   useEffect(() => {
@@ -37,18 +39,22 @@ export const useAuthedCollection = <T = any>({
   }, [firebaseUser, ...dependencies])
 
   const onUpdate = async (querySnap: QuerySnapshot) => {
-    const allDocs = querySnap.docs
-    const nextValue: T[] = []
-    for (const doc of allDocs) {
-      nextValue.push(
-        transformValue({
-          ...(includeIds && { id: doc.id }),
-          ...doc.data(),
-        }),
-      )
+    try {
+      const nextValue: T[] = []
+      const allDocs = querySnap.docs
+      for (const doc of allDocs) {
+        nextValue.push(
+          transformValue({
+            ...(includeIds && { id: doc.id }),
+            ...doc.data(),
+          }),
+        )
+      }
+      const sortedNextValue = sortValues(nextValue)
+      setValue(sortedNextValue)
+    } catch (error) {
+      setValue([] as T[])
     }
-    const sortedNextValue = sortValues(nextValue)
-    setValue(sortedNextValue)
   }
 
   return value

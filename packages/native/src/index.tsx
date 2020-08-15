@@ -1,8 +1,6 @@
 import auth from '@react-native-firebase/auth'
 
-import { useAuthFactory } from './shared/useAuth'
-const useAuth = useAuthFactory(auth)
-export { useAuth }
+export { auth }
 
 export * from './shared/useAuth'
 export * from './shared/useAuthedCollection'

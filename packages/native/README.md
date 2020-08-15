@@ -12,22 +12,18 @@ Creating a secure realtime connection with Firestore is simple.
 
 ```tsx
 // in /src/components/OrdersList.tsx
-import { useAuthedCollection } from '@humancollective/human-hooks-firebase';
-import firebase from 'firebase';
+import { useAuthedCollection } from '@humancollective/human-hooks-firebase'
+import firebase from 'firebase'
 
-import { Order } from '../types';
+import { Order } from '../types'
 
 export const OrdersList = () => {
   // create a Firestore listener with the current user's ID
   // it will respond automatically to changes in auth / user!
-  const orders = useAuthedCollection<Order>({
-    getQueryRef: uid =>
-      firebase
-        .firestore()
-        .collection('orders')
-        .where('user', '==', uid),
-    includeIds: true,
-  });
+  const orders = useAuthedCollection<Order>(
+    (uid) => firebase.firestore().collection('orders').where('user', '==', uid),
+    { includeIds: true },
+  )
 
   return orders ? (
     <div>
@@ -39,8 +35,8 @@ export const OrdersList = () => {
     </div>
   ) : (
     <Loading />
-  );
-};
+  )
+}
 ```
 
 With just a few of lines of code, we've created a new context with a Firestore listener. That listener will return an empty array unless the user is logged in. If they're logged in, it will return all of the orders they own _(**note** - this depends on your data model and security rules)_.

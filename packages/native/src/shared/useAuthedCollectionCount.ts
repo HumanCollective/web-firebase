@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 
-import { useAuth } from '../'
+import { useAuth } from './useAuth'
 import { QuerySnapshot, QueryReference } from './types'
 
-export const useAuthedCollectionCount = ({
-  app,
-  getQueryRef,
-  defaultValue = null,
-}: {
-  app?: any
-  getQueryRef: (firebaseUserId: string) => QueryReference
-  defaultValue?: number | null
-}) => {
+export const useAuthedCollectionCount = (
+  getQueryRef: (firebaseUserId: string) => QueryReference,
+  {
+    defaultValue,
+  }: {
+    defaultValue?: number | null
+  } = {},
+) => {
   const [value, setValue] = useState(defaultValue)
   const [listener, setListener] = useState({ unsubscribe: () => {} })
+
+  const app = useMemo(() => getQueryRef('unused_uid').firestore.app, [
+    getQueryRef,
+  ])
   const { firebaseUser } = useAuth(app)
 
   useEffect(() => {

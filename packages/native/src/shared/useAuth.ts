@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react'
 
-import { Auth } from './types'
+import { auth } from '../'
 
-type DefaultUserType = any & { uid: string }
-
-export const useAuthFactory = (auth: Auth) => <U = DefaultUserType>(
-  app?: any,
-) => {
+export const useAuth = (app?: any) => {
   const defaults: {
     isInitialized: boolean
-    firebaseUser?: U
+    firebaseUser?: any | null
     isLoggedIn?: boolean
   } = {
     isInitialized: false,
@@ -17,10 +13,10 @@ export const useAuthFactory = (auth: Auth) => <U = DefaultUserType>(
   const [value, setValue] = useState(defaults)
 
   useEffect(() => {
-    auth(app).onAuthStateChanged(handleAuth)
-  }, [])
+    return auth(app).onAuthStateChanged(u => handleAuth(u))
+  }, [app])
 
-  const handleAuth = async (user?: U) => {
+  const handleAuth = (user: any | null) => {
     setValue({
       isInitialized: true,
       firebaseUser: user,

@@ -15,6 +15,9 @@ export interface DocumentSnapshot {
 }
 export interface DocumentReference {
   onSnapshot: (observer: (snap: DocumentSnapshot) => void) => Unsubscriber
+  firestore: {
+    app: any
+  }
 }
 
 // collections and queries
@@ -24,4 +27,7 @@ export interface QuerySnapshot {
 }
 export interface QueryReference {
   onSnapshot: (observer: (snap: QuerySnapshot) => void) => Unsubscriber
+  firestore: {
+    app: any
+  }
 }
