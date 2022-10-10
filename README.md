@@ -26,9 +26,10 @@ Let's say you want to create a hook to use a user's profile document, but the us
 import { useDocumentWithArgs } from 'human-hooks-firebase';
 
 const useProfile = (userId?: string) =>
-  useDocumentWithArgs<Profile>(u => doc(firestore, 'user-profiles', u), [
-    userId,
-  ]);
+  useDocumentWithArgs<Profile>(
+    u => doc(firestore, 'user-profiles', u),
+    [userId]
+  );
 ```
 
 This function will create the document reference only once the `userId` is available. If the `userId` changes, the document reference will be updated.
