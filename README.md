@@ -1,11 +1,17 @@
-# `human-hooks-firebase`
+# `@humancollective/human-hooks-firebase`
 
 This project contains some of the hooks we find useful when working with Firebase. They are all written in TypeScript and use the popular `react-firebase-hooks` package as a base.
 
 ## Installation
 
 ```bash
-npm install human-hooks-firebase
+npm install @humancollective/human-hooks-firebase
+```
+
+or
+
+```bash
+yarn add @humancollective/human-hooks-firebase
 ```
 
 ## `...WithArgs` Hooks
