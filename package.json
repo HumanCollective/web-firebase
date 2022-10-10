@@ -20,7 +20,9 @@
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
-    "react": ">=16"
+    "firebase": ">=9",
+    "react": ">=16",
+    "react-firebase-hooks": ">=5"
   },
   "husky": {
     "hooks": {
