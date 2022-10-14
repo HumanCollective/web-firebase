@@ -24,12 +24,7 @@ export const AuthContextProvider: FunctionComponent<AuthContextProps> = ({
   children,
 }) => {
   const [user, setUser] = useState<User | null>()
-
-  useEffect(() => {
-    onAuthStateChanged(auth, nextUser => {
-      setUser(nextUser)
-    })
-  }, [])
+  useEffect(() => onAuthStateChanged(auth, setUser), [])
 
   const signOut = async () => {
     setUser(null)
