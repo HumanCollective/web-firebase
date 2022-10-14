@@ -29,12 +29,6 @@
       "pre-commit": "tsdx lint"
     }
   },
-  "prettier": {
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  },
   "name": "@humancollective/web-firebase",
   "author": "Human Collective Inc.",
   "module": "dist/web-firebase.esm.js",
