@@ -35,16 +35,16 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "@humancollective/human-hooks-firebase",
+  "name": "@humancollective/web-firebase",
   "author": "Human Collective Inc.",
-  "module": "dist/human-hooks-firebase.esm.js",
+  "module": "dist/web-firebase.esm.js",
   "size-limit": [
     {
-      "path": "dist/human-hooks-firebase.cjs.production.min.js",
+      "path": "dist/web-firebase.cjs.production.min.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/human-hooks-firebase.esm.js",
+      "path": "dist/web-firebase.esm.js",
       "limit": "10 KB"
     }
   ],

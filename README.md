@@ -1,17 +1,17 @@
-# `@humancollective/human-hooks-firebase`
+# `@humancollective/web-firebase`
 
 This project contains some of the hooks we find useful when working with Firebase. They are all written in TypeScript and use the popular `react-firebase-hooks` package as a base.
 
 ## Installation
 
 ```bash
-npm install @humancollective/human-hooks-firebase
+npm install @humancollective/web-firebase
 ```
 
 or
 
 ```bash
-yarn add @humancollective/human-hooks-firebase
+yarn add @humancollective/web-firebase
 ```
 
 ## `...WithArgs` Hooks
@@ -23,13 +23,12 @@ Often when working with Firebase, you want to query a document or collection wit
 Let's say you want to create a hook to use a user's profile document, but the user's ID is only available after authentication. This would usually require more than one hook to manage, but we find it much simpler to use our `...WithArgs` hooks.
 
 ```tsx
-import { useDocumentWithArgs } from 'human-hooks-firebase';
+import { useDocumentWithArgs } from 'web-firebase';
 
 const useProfile = (userId?: string) =>
-  useDocumentWithArgs<Profile>(
-    u => doc(firestore, 'user-profiles', u),
-    [userId]
-  );
+  useDocumentWithArgs<Profile>(u => doc(firestore, 'user-profiles', u), [
+    userId,
+  ]);
 ```
 
 This function will create the document reference only once the `userId` is available. If the `userId` changes, the document reference will be updated.
@@ -45,7 +44,7 @@ The return type can be used to determine the state of the document:
 This function is very similar to `useDocumentWithArgs` but it returns an array of expanded values. For example, if you want to query a collection of messages on a specific thread, you could create a hook like this:
 
 ```tsx
-import { useDocumentWithArgs } from 'human-hooks-firebase'
+import { useDocumentWithArgs } from 'web-firebase'
 
 const useMessages = (threadId?: string) => useDocumentWithArgs<Profile>(
   (t) => query(
