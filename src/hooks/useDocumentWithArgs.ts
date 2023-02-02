@@ -16,6 +16,6 @@ export const useDocumentWithArgs = <T = any>(
 ) => {
   const ref = documentRefWithArgs(getDocumentReference, args)
   const [doc] = useDocument(ref)
-  const data = doc ? { ...doc.data(), id: doc.id } : undefined
-  return !doc?.exists() ? null : (data as WithId<T>)
+  const data = doc ? ({ ...doc.data(), id: doc.id } as WithId<T>) : undefined
+  return !doc?.exists() ? null : data
 }
